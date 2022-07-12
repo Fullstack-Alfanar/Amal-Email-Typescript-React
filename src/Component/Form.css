@@ -9,6 +9,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 h1 {
@@ -19,9 +20,10 @@ h1 {
 .container {
   background-color: rgb(3, 72, 75);
   text-align: center;
-  padding: 4em;
+  padding: 10em;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  max-width: 1400px;
 }
 
 label {
@@ -35,17 +37,35 @@ label {
 }
 
 input {
-  padding: 0.2em;
+  padding: 0.4em;
   margin: 0.5em;
   border-radius: 0.5em;
   background-color: rgb(240, 205, 162);
 }
 
+input:focus{
+  background-color: rgb(236, 152, 192);
+}
+
+
 button {
   color: white;
   background-color: crimson;
-  border-radius: 1em;
+  border-radius: 0.5em;
   padding: 0.4em 1em;
   margin-top: 1em;
   border: none;
+  font-size: 1.1em;
+    cursor: pointer;
+
+}
+
+button:hover{
+  background-color: chartreuse;
+  color:  rgb(3, 72, 75);
+}
+
+form{
+  max-width: 400px;
+  max-height: 1200px;
 }

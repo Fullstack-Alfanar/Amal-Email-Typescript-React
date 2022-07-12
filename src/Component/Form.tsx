@@ -16,43 +16,42 @@ const Form: React.FC = () => {
         setMessageEmail("It should be a valid email address!");
         console.log("Invalid Email!");
         return false;
-      } else if (email == "") {
-        setMessageEmail("Please Enter Your Email");
-        console.log("emails field is empty");
-        return false;
-      } else {
-        setMessageEmail(" Email is Valid");
+      }  else {
+        setMessageEmail(" Valid Email");
         console.log("Email Is Valid");
         return true;
       }
     };
 
     const PasswordValidation = () => {
-      const regEx =
+        if (email === "" || password === "" ) {
+          alert("there is any empty filed");
+        }
+      const regEx2 =
         /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
-      if (!regEx.test(password)) {
+      if (!regEx2.test(password)) {
         setPasswordMessage(
-          "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!"
+          "it should be  a valid password "
         );
         console.log("Invalid Password");
         return false;
-      } else if (password == "") {
-        setPasswordMessage("Please Enter Your Password");
-        console.log("Password's field is empty");
-        return false;
-      } else {
+      }else {
         setPasswordMessage("Valid Password");
         console.log("valid password");
         return true;
       }
     };
-    if (emailValidation() && PasswordValidation()) {
+    if (emailValidation() || PasswordValidation()) {
+     
       return true;
     }
+    
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    setEmail("");
+    setPassword("");
   };
 
   const handleOnChange = (e: any) => {
@@ -79,7 +78,7 @@ const Form: React.FC = () => {
                 onChange={handleOnChange}
               />
             </td>
-            <label className="label1"> {messageEmail}</label>
+            <p className="label1"> {messageEmail}</p>
           </tr>
           <tr>
             <td>
