@@ -27,9 +27,10 @@ const Form: React.FC = () => {
         if (email === "" || password === "" ) {
           alert("there is any empty filed");
         }
-      const regEx2 =
+      const regEx1 =
         /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
-      if (!regEx2.test(password)) {
+        
+      if (!regEx1.test(password)) {
         setPasswordMessage(
           "it should be  a valid password "
         );
@@ -37,14 +38,13 @@ const Form: React.FC = () => {
         return false;
       }else {
         setPasswordMessage("Valid Password");
-        console.log("valid password");
+        console.log("Password Is Valid");
         return true;
       }
     };
-    if (emailValidation() || PasswordValidation()) {
+    emailValidation() ;PasswordValidation();
      
-      return true;
-    }
+      
     
   };
 
@@ -66,34 +66,41 @@ const Form: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <h1>Email Validation</h1>
         <table>
-          <tr>
-            <td>
-              <label>Email:</label>
-            </td>
-            <td>
-              <input
-                type="email"
-                value={email}
-                placeholder="Your Email"
-                onChange={handleOnChange}
-              />
-            </td>
-            <p className="label1"> {messageEmail}</p>
-          </tr>
-          <tr>
-            <td>
-              <label>Password:</label>
-            </td>
-            <td>
-              <input
-                type="password"
-                placeholder="Your Password"
-                value={password}
-                onChange={handleOnChange2}
-              />
-            </td>
-            <label className="label1"> {passwordMessage}</label>
-          </tr>
+          <thead>
+            <tr>
+              <td>
+                <label>Email:</label>
+              </td>
+              <td>
+                <input
+                  type="email"
+                  value={email}
+                  placeholder="Your Email"
+                  onChange={handleOnChange}
+                />
+              </td>
+              <td>
+                <p className="label1"> {messageEmail}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Password:</label>
+              </td>
+              <td>
+                <input
+                  type="password"
+                  value={password}
+                  placeholder="Your Password"
+                  onChange={handleOnChange2}
+                />
+              </td>
+              <td>
+                <p className="label1">{passwordMessage}</p>
+              </td>
+            </tr>
+          </thead>
+          <tbody></tbody>
         </table>
 
         <button onClick={validation}>Check</button>
