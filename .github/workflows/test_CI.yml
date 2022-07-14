@@ -9,26 +9,26 @@ on:
        - "develop"
        - "product"
 
-  jobs:
+jobs:
     build:
-      runs-on: [ubuntu-latest]
+      runs-on: ubuntu-latest
       strategy:
-      matrix:
-        node: [14,16,18]
-      name: node ${{matrix.node}} version
+        matrix:
+          node: [14,16,18]
+      name: node ${{matrix.node}}version
       steps:
       
-         - name: check repository
-           uses: action/checkout@v2
+       - name: check repository
+         uses: action/checkout@v2
 
-         - name: setup node version${{matrix.node-version}}
-           uses: action/checkout@v1
-           with:
-                node-version: ${{matrix.node-version}}
+       - name: setup node version${{matrix.node-version}}
+         uses: action/checkout@v1
+         with:
+          node-version: ${{matrix.node-version}}
 
-          - name: install packages
-            run: npm install
+       - name: install packages
+         run: npm install
 
-          - name: run build
-             run: npm run build
+       - name: run build
+         run: npm run build
            
