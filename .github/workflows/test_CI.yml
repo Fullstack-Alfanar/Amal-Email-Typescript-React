@@ -3,7 +3,7 @@ on:
    push:
         branches: [main, develop,product]
   
-  pull_request:
+   pull_request:
        branches:
        - "main"
        - "develop"
