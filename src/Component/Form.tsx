@@ -42,7 +42,7 @@ const Form: React.FC = () => {
         return true;
       }
     };
-    emailValidation() ;PasswordValidation();
+    emailValidation() ; PasswordValidation();
      
       
     

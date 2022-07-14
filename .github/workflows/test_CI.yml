@@ -1,0 +1,34 @@
+name: Deploy test
+on: 
+   push:
+        branches: [main, develop,product]
+  
+  pull_request:
+       branches:
+       - "main"
+       - "develop"
+       - "product"
+
+  jobs:
+    build:
+      runs-on: [ubuntu-latest]
+      strategy:
+      matrix:
+        node: [14,16,18]
+      name: node ${{matrix.node}} version
+      steps:
+      
+         - name: check repository
+           uses: action/checkout@v2
+
+         - name: setup node version${{matrix.node-version}}
+           uses: action/checkout@v1
+           with:
+                node-version: ${{matrix.node-version}}
+
+          - name: install packages
+            run: npm install
+
+          - name: run build
+             run: npm run build
+           
