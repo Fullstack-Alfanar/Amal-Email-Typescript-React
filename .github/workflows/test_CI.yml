@@ -1,34 +1,46 @@
-name: Deploy test
-on: 
-   push:
-        branches: [main, develop,product]
-  
-   pull_request:
-       branches:
-       - "main"
-       - "develop"
-       - "product"
+name: Integration
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-    build:
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          node: [14,16,18]
-      name: node ${{matrix.node}}version
-      steps:
-      
-       - name: check repository
-         uses: action/checkout@v2
+  build:
 
-       - name: setup node version${{matrix.node-version}}
-         uses: action/checkout@v1
-         with:
-          node-version: ${{matrix.node-version}}
+    runs-on: ubuntu-latest
 
-       - name: install packages
-         run: npm install
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-       - name: run build
-         run: npm run build
-           
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm i
+    - run: npm run build
+
+  unit-test:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm i
+    - run: npm run test
