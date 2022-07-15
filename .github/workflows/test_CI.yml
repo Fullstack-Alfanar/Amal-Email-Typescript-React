@@ -1,24 +1,32 @@
-name: Github Actions 
-
+name: Deploy test
 on:
-  pull_request:
   push:
-    branches: 
-      - main
-      
+    branches: [main, develop, prodact]
+
+  pull_request:
+    branches:
+      - "main"
+      - "develop"
+      - "prodact"
 
 jobs:
-  test:
-    name: Running Units Tests
+  build:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node: [14,16,18]
+    name: node ${{matrix.node}} version
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install
-      run: npm install
-    - name: Test
-      run: npm test
+      - name: check repo
+        uses: action/checkout@v2
+
+      - name: setup node version ${{matrix.node-version}}
+        uses: action/checkout@v1
+        with:
+            node-version: ${{matrix.node-version}}
+      
+      - name: Install packages
+        run: npm install
+
+      - name: run build
+        run: npm run build
